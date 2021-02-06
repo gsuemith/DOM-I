@@ -40,3 +40,42 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+// Array.from and forEach
+Array.from(document.querySelector('nav').children).forEach((element, i) => {
+  element.textContent = siteContent.nav[`nav-item-${i + 1}`];
+});
+
+let ctaText = document.querySelector('.cta-text');
+ctaText.children[0].textContent = siteContent.cta.h1;
+ctaText.children[1].textContent = siteContent.cta.button;
+
+let features = document.querySelector('.top-content');
+features.children[0].children[0].textContent = siteContent['main-content']['features-h4'];
+features.children[1].children[0].textContent = siteContent['main-content']['about-h4'];
+features.children[0].children[1].textContent = siteContent['main-content']['features-content'];
+features.children[1].children[1].textContent = siteContent['main-content']['about-content'];
+
+let bottom = document.querySelector(".bottom-content");
+bottom.children[0].children[0].textContent = siteContent['main-content']['services-h4'];
+bottom.children[1].children[0].textContent = siteContent['main-content']['product-h4'];
+bottom.children[2].children[0].textContent = siteContent['main-content']['vision-h4'];
+bottom.children[0].children[1].textContent = siteContent['main-content']['services-content'];
+bottom.children[1].children[1].textContent = siteContent['main-content']['product-content'];
+bottom.children[2].children[1].textContent = siteContent['main-content']['vision-content'];
+
+let contact = document.querySelector('.contact');
+contact.children[0].textContent = siteContent.contact['contact-h4'];
+contact.children[1].textContent = siteContent.contact.address;
+contact.children[2].textContent = siteContent.contact.phone;
+contact.children[3].textContent = siteContent.contact.email;
+
+let footer = document.querySelector('footer');
+footer.querySelector('p').textContent = siteContent.footer.copyright;
+
+// Direct access
+let cta = document.getElementById('cta-img');
+cta.src = siteContent['cta']['img-src'];
+
+//Chain with query Selector
+document.querySelector("#middle-img").setAttribute('src', siteContent['main-content']['middle-img-src']);
