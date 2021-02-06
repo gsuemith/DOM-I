@@ -83,3 +83,11 @@ contact.children[3].textContent = siteContent.contact.email;
 let footer = document.querySelector('footer');
 footer.querySelector('p').textContent = siteContent.footer.copyright;
 
+let search = document.createElement('a');
+let login = document.createElement('a');
+search.href = "#";
+search.textContent = "Search";
+login.href = "#";
+login.textContent = "Log In"
+nav.appendChild(search);
+nav.prepend(login);
