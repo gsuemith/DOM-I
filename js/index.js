@@ -41,9 +41,19 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
 
+// Direct access
+let cta = document.getElementById('cta-img');
+cta.src = siteContent['cta']['img-src'];
+
+//Chain with query Selector
+document.querySelector("#middle-img").setAttribute('src', siteContent['main-content']['middle-img-src']);
+
+
 // Array.from and forEach
-Array.from(document.querySelector('nav').children).forEach((element, i) => {
+let nav = document.querySelector('nav');
+Array.from(nav.children).forEach((element, i) => {
   element.textContent = siteContent.nav[`nav-item-${i + 1}`];
+  element.style.color = 'green';
 });
 
 let ctaText = document.querySelector('.cta-text');
@@ -73,9 +83,3 @@ contact.children[3].textContent = siteContent.contact.email;
 let footer = document.querySelector('footer');
 footer.querySelector('p').textContent = siteContent.footer.copyright;
 
-// Direct access
-let cta = document.getElementById('cta-img');
-cta.src = siteContent['cta']['img-src'];
-
-//Chain with query Selector
-document.querySelector("#middle-img").setAttribute('src', siteContent['main-content']['middle-img-src']);
