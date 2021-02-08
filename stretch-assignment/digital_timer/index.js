@@ -9,6 +9,8 @@ let times = {
 }
 keys = ['cs', 'ds', 's', 'Ds']
 
+var interval10;
+
 function increment(){
     times.cs += 1;
 
@@ -26,7 +28,24 @@ function increment(){
 
     if(Ds.textContent === '1'){
         window.clearInterval(interval10);
+        cs.className = 'redDigit';
+        ds.className = 'redDigit';
+        s.className = 'redDigit';
+        Ds.className = 'redDigit';
+        startButton.disabled = false;
     }
 }
 
-var interval10 = window.setInterval(increment, 10);
+let startButton = document.getElementById("start");startButton.addEventListener("click", startTimer);
+
+function startTimer(){
+    times.Ds = 0;
+    cs.className = 'digit';
+    ds.className = 'digit';
+    s.className = 'digit';
+    Ds.className = 'digit';
+    interval10 = window.setInterval(increment, 10);
+    startButton.disabled = true;
+}
+
+
