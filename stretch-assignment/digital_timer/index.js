@@ -1,37 +1,32 @@
-let cs = document.getElementById('msTens');
-let ds = document.getElementById('msHundreds');
-let s = document.getElementById('secondOnes');
-let Ds = document.getElementById('secondTens');
 
-let i = 1;
-let times = {
-    cs:0, ds:0, s:0, Ds:0
-}
-keys = ['cs', 'ds', 's', 'Ds']
+const IDs = ['msTens', 'msHundreds', 'secondOnes', 'secondTens'];
+
+const digits = IDs.map(id => {
+    let digit = {
+        id: id,
+        div: document.getElementById(id),
+        n: 0
+    };
+
+    return digit;
+});
 
 var interval10;
 
 function increment(){
-    times.cs += 1;
 
-    for(let i = 1; i < keys.length; i++){
-        if (times[keys[i - 1]] === 10){
-            times[keys[i-1]] = 0;
-            times[keys[i]] += 1;
+    digits.forEach((digit, index) => {
+        if( index === 0 || digits[index-1].n === 10){
+            if(index > 0){digits[index-1].n = 0;}
+            digit.n += 1;
         }
-    }
+    })
 
-    cs.textContent = times.cs;
-    ds.textContent = times.ds;
-    s.textContent = times.s;
-    Ds.textContent = times.Ds;
+    digits.forEach(digit => digit.div.textContent = digit.n);
 
-    if(Ds.textContent === '1'){
+    if(digits[3].div.textContent === '1'){
         window.clearInterval(interval10);
-        cs.className = 'redDigit';
-        ds.className = 'redDigit';
-        s.className = 'redDigit';
-        Ds.className = 'redDigit';
+        digits.forEach(digit => digit.div.classList.toggle('redDigit'));
         startButton.disabled = false;
     }
 }
@@ -39,13 +34,24 @@ function increment(){
 let startButton = document.getElementById("start");startButton.addEventListener("click", startTimer);
 
 function startTimer(){
-    times.Ds = 0;
-    cs.className = 'digit';
-    ds.className = 'digit';
-    s.className = 'digit';
-    Ds.className = 'digit';
-    interval10 = window.setInterval(increment, 10);
+    if(digits[3].n !== 0){
+        digits.forEach(digit => digit.div.classList.toggle('redDigit'));
+    }
+
+    digits[3].n = 0;
+    interval10 = window.setInterval(increment, 5);
     startButton.disabled = true;
 }
 
+let resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", resetTimer);
+
+function resetTimer(){
+    window.clearInterval(interval10);
+    startButton.disabled = false;
+    digits.forEach(digit =>{
+        digit.n = 0;
+        digit.div.textContent = 0;
+    })
+}
 
